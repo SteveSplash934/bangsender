@@ -1,8 +1,6 @@
 from fastapi import APIRouter
 from app.api import health
-# from app.api.smtp import routes as smtp_routes
-
-# Uncomment these lines as you create the routes.py files in those folders:
+from app.api.smtp.routes import router as smtp_routes
 # from app.api.proxies import routes as proxy_routes
 # from app.api.campaigns import routes as campaign_routes
 # from app.api.templates import routes as template_routes
@@ -16,11 +14,11 @@ api_router = APIRouter()
 api_router.include_router(health.router, tags=["System"])
 
 # 2. Add SMTP Routes (Prefix /smtp, so endpoints become /api/v1/smtp/...)
-# api_router.include_router(
-#     smtp_routes.router, 
-#     prefix="/smtp", 
-#     tags=["SMTP"]
-# )
+api_router.include_router(
+    smtp_routes, 
+    prefix="/smtp", 
+    tags=["SMTP"]
+)
 
 # 3. Future Routes (Uncomment as you build them)
 # api_router.include_router(proxy_routes.router, prefix="/proxies", tags=["Proxies"])
